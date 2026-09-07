@@ -81,6 +81,6 @@ enum class AppDestinations(
     val icon: ImageVector,
 ) {
     DICTIONARY("Dictionary", icon = Icons.Default.Book),
-    TRANSLATION("Translate", icon = Icons.Default.SyncAlt),
-    FLASHCARDS("Study", icon = Icons.Default.HourglassBottom),
+    TRANSLATE("Translate", icon = Icons.Default.SyncAlt),
+    STUDY("Study", icon = Icons.Default.HourglassBottom),
 }
