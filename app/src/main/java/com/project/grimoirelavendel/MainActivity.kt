@@ -4,8 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Book
+import androidx.compose.material.icons.filled.HourglassBottom
+import androidx.compose.material.icons.filled.SyncAlt
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -16,10 +22,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.project.grimoirelavendel.TopNavBar.TopNavBar
 import com.project.grimoirelavendel.ui.theme.GrimoireLavendelTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,6 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @PreviewScreenSizes
 @Composable
 fun GrimoireLavendelApp() {
@@ -45,7 +51,7 @@ fun GrimoireLavendelApp() {
                 item(
                     icon = {
                         Icon(
-                            painterResource(it.icon),
+                            imageVector = it.icon,
                             contentDescription = it.label
                         )
                     },
@@ -56,36 +62,25 @@ fun GrimoireLavendelApp() {
             }
         }
     ) {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
+        Scaffold(
+            topBar = {
+                TopNavBar(title = currentDestination.label)
+            }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) { }
         }
     }
 }
 
 enum class AppDestinations(
     val label: String,
-    val icon: Int,
+    val icon: ImageVector,
 ) {
-    DICTIONARY("Dictionary", R.drawable.ic_home),
-    TRANSLATION("Translation", R.drawable.ic_favorite),
-    FLASHCARDS("Flashcards", R.drawable.ic_account_box),
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    GrimoireLavendelTheme {
-        Greeting("Android")
-    }
+    DICTIONARY("Dictionary", icon = Icons.Default.Book),
+    TRANSLATION("Translate", icon = Icons.Default.SyncAlt),
+    FLASHCARDS("Study", icon = Icons.Default.HourglassBottom),
 }
