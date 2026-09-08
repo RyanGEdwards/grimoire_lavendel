@@ -4,7 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -24,7 +30,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.project.grimoirelavendel.Dictionary.DictionaryVM
+import com.project.grimoirelavendel.Study.StudyVM
 import com.project.grimoirelavendel.TopNavBar.TopNavBar
+import com.project.grimoirelavendel.Translate.TranslateVM
 import com.project.grimoirelavendel.ui.theme.GrimoireLavendelTheme
 
 class MainActivity : ComponentActivity() {
@@ -67,11 +76,32 @@ fun GrimoireLavendelApp() {
                 TopNavBar(title = currentDestination.label)
             }
         ) { innerPadding ->
-            Column(
+            AnimatedContent(
+                targetState = currentDestination,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
-            ) { }
+                    .padding(innerPadding),
+                transitionSpec = {
+                    // Determine slide direction based on enum position comparison
+                    val isMovingForward = targetState.ordinal > initialState.ordinal
+
+                    if (isMovingForward) {
+                        // New screen slides in from right, old screen slides out to left
+                        (slideInHorizontally(animationSpec = tween(300)) { width -> width } + fadeIn()) togetherWith
+                                (slideOutHorizontally(animationSpec = tween(300)) { width -> -width } + fadeOut())
+                    } else {
+                        // New screen slides in from left, old screen slides out to right
+                        (slideInHorizontally(animationSpec = tween(300)) { width -> -width } + fadeIn()) togetherWith
+                                (slideOutHorizontally(animationSpec = tween(300)) { width -> width } + fadeOut())
+                    }
+                },
+            ) { destination ->
+                when (destination) {
+                    AppDestinations.DICTIONARY -> DictionaryVM()
+                    AppDestinations.TRANSLATE -> TranslateVM()
+                    AppDestinations.STUDY -> StudyVM()
+                }
+            }
         }
     }
 }
@@ -81,6 +111,6 @@ enum class AppDestinations(
     val icon: ImageVector,
 ) {
     DICTIONARY("Dictionary", icon = Icons.Default.Book),
-    TRANSLATION("Translate", icon = Icons.Default.SyncAlt),
-    FLASHCARDS("Study", icon = Icons.Default.HourglassBottom),
+    TRANSLATE("Translate", icon = Icons.Default.SyncAlt),
+    STUDY("Study", icon = Icons.Default.HourglassBottom),
 }
