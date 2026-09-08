@@ -12,13 +12,14 @@ import androidx.compose.runtime.Composable
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNavBar(
-    title: String
+    title: String,
+    onMenuClick: () -> Unit
 ){
     CenterAlignedTopAppBar(
         title = { Text(text = title) },
         navigationIcon = {
             IconButton(
-                onClick = { }
+                onClick = { onMenuClick() }
             ) {
                 Icon(
                     imageVector = Icons.Default.Menu,
