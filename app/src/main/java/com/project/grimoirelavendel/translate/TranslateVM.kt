@@ -1,12 +1,12 @@
-package com.project.grimoirelavendel.Dictionary
+package com.project.grimoirelavendel.translate
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun DictionaryVM() {
+fun TranslateVM() {
     Column {
-        Text(text = "Dictionary")
+        Text(text = "Translate")
     }
 }
