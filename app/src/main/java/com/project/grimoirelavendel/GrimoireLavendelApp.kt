@@ -18,6 +18,7 @@ import com.project.grimoirelavendel.menu.LavendelBottomNavBar
 import com.project.grimoirelavendel.menu.LavendelSideMenu
 import com.project.grimoirelavendel.menu.LavendelTabLayout
 import com.project.grimoirelavendel.menu.LavendelTopNavBar
+import com.project.grimoirelavendel.network.DeepLRepository
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,6 +28,7 @@ fun GrimoireLavendelApp() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val pagerState = rememberPagerState(pageCount = { AppDestinations.entries.size })
     val coroutineScope = rememberCoroutineScope()
+    val deepl = DeepLRepository()
 
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.DICTIONARY) }
 
@@ -56,7 +58,8 @@ fun GrimoireLavendelApp() {
             ) { innerPadding ->
                 LavendelTabLayout(
                     pagerState = pagerState,
-                    contentPadding = innerPadding
+                    contentPadding = innerPadding,
+                    deepl = deepl
                 )
             }
         }
