@@ -9,9 +9,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -134,15 +134,13 @@ fun DeepLTranslateResultsDisplay (
     translations: TranslationResponse,
     modifier: Modifier
 ) {
-    LazyColumn (
+    Column (
         modifier = modifier
     ) {
         for (translation in translations.translations) {
-            item {
-                DeepLResultRow(
-                    text = translation.text
-                )
-            }
+            DeepLResultRow(
+                text = translation.text
+            )
         }
     }
 }
