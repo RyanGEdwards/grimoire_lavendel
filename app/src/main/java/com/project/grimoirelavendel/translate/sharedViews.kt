@@ -90,7 +90,6 @@ fun LanguageSourceTargetRow (
 fun DeepLResultRow (
     text: String
 ) {
-    HorizontalDivider()
     Text (
         text = text,
         modifier = Modifier
@@ -99,5 +98,4 @@ fun DeepLResultRow (
         fontSize = MaterialTheme.typography.bodyLarge.fontSize,
         textAlign = androidx.compose.ui.text.style.TextAlign.Center
     )
-    HorizontalDivider()
 }
