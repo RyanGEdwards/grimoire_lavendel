@@ -28,8 +28,8 @@ fun CardHeader (
         Text (
             text = title,
             modifier = Modifier
-                .padding(8.dp)
-                .padding(horizontal = 8.dp),
+                .padding(horizontal = 20.dp)
+                .padding(vertical = 24.dp),
             fontSize = MaterialTheme.typography.headlineMedium.fontSize,
         )
         Spacer(modifier = Modifier.weight(1f))
