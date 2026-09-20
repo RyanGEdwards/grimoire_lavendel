@@ -8,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.SyncAlt
 import androidx.compose.material3.Button
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -53,14 +52,13 @@ fun LanguageSourceTargetRow (
     Row (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp)
             .padding(bottom = 8.dp)
     ) {
         Box(
             modifier = Modifier
                 .weight(1f)
                 .align(alignment = Alignment.CenterVertically),
-            contentAlignment = Alignment.CenterStart,
+            contentAlignment = Alignment.Center,
         ) { Text (text = sourceLanguage) }
         Box(
             modifier = Modifier
@@ -81,7 +79,7 @@ fun LanguageSourceTargetRow (
             modifier = Modifier
                 .weight(1f)
                 .align(alignment = Alignment.CenterVertically),
-            contentAlignment = Alignment.CenterEnd
+            contentAlignment = Alignment.Center
         ) { Text (text = targetLanguage) }
     }
 }
