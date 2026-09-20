@@ -104,7 +104,8 @@ fun TranslateCardContents (
                 placeholder = { Text("Input text to translate") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 8.dp),
+                    .padding(all = 8.dp)
+                    .padding(bottom = 2.dp),
                 minLines = 3
             )
             LanguageSourceTargetRow (
@@ -117,7 +118,7 @@ fun TranslateCardContents (
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp)
-                    .padding(bottom = 8.dp)
+                    .padding(bottom = 4.dp)
             ) {
                 Text(text = "Translate")
             }
