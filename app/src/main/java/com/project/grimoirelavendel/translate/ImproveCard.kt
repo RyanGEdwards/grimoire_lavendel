@@ -47,6 +47,7 @@ fun ImproveCard (
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
+            .padding(vertical = 8.dp)
             .clickable { onClick() }
     ) {
         CardHeader(
