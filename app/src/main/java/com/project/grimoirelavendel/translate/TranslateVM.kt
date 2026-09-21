@@ -39,6 +39,7 @@ class TranslateViewModel : ViewModel() {
     }
 
     fun translateButtonClick(repo: DeepLRepository): Job {
+        if (translateInput.isEmpty()) { return Job() }
         return viewModelScope.launch {
             translationResponse = repo.getTranslations(
                 textToTranslate = listOf(translateInput),
@@ -53,6 +54,7 @@ class TranslateViewModel : ViewModel() {
     var improveInput by mutableStateOf("")
 
     fun improveButtonClick(repo: DeepLRepository): Job {
+        if (improveInput.isEmpty()) { return Job() }
         return viewModelScope.launch {
             improvementResponse = repo.getImprovements(
                 textToImprove = listOf(improveInput)
@@ -66,6 +68,7 @@ class TranslateViewModel : ViewModel() {
     var correctInput by mutableStateOf("")
 
     fun correctButtonClick(repo: DeepLRepository): Job {
+        if (correctInput.isEmpty()) { return Job() }
         return viewModelScope.launch {
             correctResponse = repo.getCorrections(
                 textToCorrect = listOf(correctInput)

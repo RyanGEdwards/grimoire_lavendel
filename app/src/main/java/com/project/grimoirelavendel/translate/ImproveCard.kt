@@ -47,6 +47,7 @@ fun ImproveCard (
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
+            .padding(vertical = 8.dp)
             .clickable { onClick() }
     ) {
         CardHeader(
@@ -94,7 +95,8 @@ fun ImproveCardContents (
                 placeholder = { Text("Input text to improve") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 8.dp),
+                    .padding(all = 8.dp)
+                    .padding(bottom = 4.dp),
                 minLines = 3
             )
             Button(
@@ -102,7 +104,7 @@ fun ImproveCardContents (
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp)
-                    .padding(bottom = 8.dp)
+                    .padding(bottom = 4.dp)
             ) {
                 Text(text = "Improve")
             }
