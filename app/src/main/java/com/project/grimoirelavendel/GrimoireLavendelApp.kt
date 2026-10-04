@@ -13,7 +13,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import com.project.grimoirelavendel.data.AppDestinations
+import com.project.grimoirelavendel.data.enums.AppDestinations
 import com.project.grimoirelavendel.menu.LavendelBottomNavBar
 import com.project.grimoirelavendel.menu.LavendelSideMenu
 import com.project.grimoirelavendel.menu.LavendelTabLayout

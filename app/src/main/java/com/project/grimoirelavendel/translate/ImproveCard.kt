@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.project.grimoirelavendel.data.ImproveResponse
+import com.project.grimoirelavendel.data.classes.ImproveResponse
 
 @Composable
 fun ImproveCard (
