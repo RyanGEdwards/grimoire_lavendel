@@ -8,8 +8,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DictionaryDAO {
     @Query("""
-        SELECT * FROM dictionary_entries 
-        WHERE term LIKE :query || '%' OR reading LIKE :query || '%' 
+        SELECT d.* FROM dictionary_entries d
+        WHERE d.term LIKE :query || '%' 
+           OR d.reading LIKE :query || '%' 
+           OR d.id IN (
+               SELECT rowid FROM fts_definitions 
+               WHERE fts_definitions MATCH :query
+           )
         ORDER BY score DESC 
         LIMIT 50
     """)

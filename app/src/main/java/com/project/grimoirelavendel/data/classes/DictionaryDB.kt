@@ -7,8 +7,11 @@ import androidx.room.RoomDatabase
 import com.project.grimoirelavendel.data.interfaces.DictionaryDAO
 
 @Database(
-    entities = [DictionaryEntry::class], // 1. Table mapping
-    version = 1,                        // 2. Schema versioning
+    entities = [
+        DictionaryEntry::class,
+        Definition::class
+    ],
+    version = 1,
     exportSchema = false
 )
 abstract class DictionaryDB: RoomDatabase() {
