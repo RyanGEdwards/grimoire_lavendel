@@ -1,12 +1,59 @@
 package com.project.grimoirelavendel.dictionary
 
+import android.app.Application
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.project.grimoirelavendel.data.classes.DictionaryDB
+import com.project.grimoirelavendel.network.DictionaryRepository
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.launch
+
+class DictionaryViewModel(application: Application) : AndroidViewModel(application) {
+    private val database = DictionaryDB.getInstance(application)
+    private val repository = DictionaryRepository(database = database)
+
+    var searchResults = repository.searchDictionary("")
+
+    fun searchDictionary(query: String) {
+        if (query != "") {
+            viewModelScope.launch {
+                searchResults = repository.searchDictionary(query)
+            }
+        }
+    }
+
+    fun clearSearch() {
+        searchResults = emptyFlow()
+    }
+
+    var searchValue by mutableStateOf("")
+}
 
 @Composable
-fun DictionaryVM() {
+fun DictionaryVM (
+    viewModel: DictionaryViewModel = viewModel()
+) {
     Column {
-        Text(text = "Dictionary")
+        SearchBar(
+            searchValue = viewModel.searchValue,
+            searchInputChange = {
+                viewModel.searchValue = it
+                viewModel.searchDictionary(it)
+            },
+            clearSearch = {
+                viewModel.clearSearch()
+                viewModel.searchValue = ""
+                viewModel.searchResults = emptyFlow()
+            }
+        )
+        DictionaryResults(
+            searchResultsFlow = viewModel.searchResults
+        )
     }
 }
