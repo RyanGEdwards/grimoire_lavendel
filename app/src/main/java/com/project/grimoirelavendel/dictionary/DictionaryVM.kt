@@ -51,15 +51,15 @@ fun DictionaryVM (
     val listState = rememberLazyListState()
     val isSearchBarVisible by remember {
         derivedStateOf {
-            listState.firstVisibleItemIndex == 0 && listState.firstVisibleItemScrollOffset == 0
+            listState.firstVisibleItemIndex == 0 && listState.firstVisibleItemScrollOffset < 400
         }
     }
 
     Column {
         AnimatedVisibility(
             visible = isSearchBarVisible,
-            enter = expandVertically(animationSpec = tween(durationMillis = 125)),
-            exit = shrinkVertically(animationSpec = tween(durationMillis = 125))
+            enter = expandVertically(animationSpec = tween(durationMillis = 300)),
+            exit = shrinkVertically(animationSpec = tween(durationMillis = 500))
         ) {
             SearchBar(
                 searchValue = viewModel.searchValue,
