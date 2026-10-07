@@ -73,7 +73,7 @@ fun DictionaryEntryCard(
                 Text(
                     text = entry.definitions.definitions[0].meanings.joinToString(
                         separator = ", ",
-                        limit = 3,
+                        limit = 5,
                         truncated = "..."
                     ),
                     maxLines = 3
