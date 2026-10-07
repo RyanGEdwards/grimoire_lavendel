@@ -16,13 +16,14 @@ import androidx.compose.ui.unit.dp
 fun SearchBar (
     searchValue: String,
     searchInputChange: (String) -> Unit,
-    clearSearch: () -> Unit
+    clearSearch: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row (
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 4.dp)
-            .padding(bottom = 4.dp),
+            .padding(bottom = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         OutlinedTextField(

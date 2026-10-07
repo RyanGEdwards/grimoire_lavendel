@@ -1,10 +1,17 @@
 package com.project.grimoirelavendel.dictionary
 
 import android.app.Application
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -41,21 +48,35 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
 fun DictionaryVM (
     viewModel: DictionaryViewModel = viewModel()
 ) {
+    val listState = rememberLazyListState()
+    val isSearchBarVisible by remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex == 0 && listState.firstVisibleItemScrollOffset == 0
+        }
+    }
+
     Column {
-        SearchBar(
-            searchValue = viewModel.searchValue,
-            searchInputChange = {
-                viewModel.searchValue = it
-                viewModel.searchDictionary(it)
-            },
-            clearSearch = {
-                viewModel.clearSearch()
-                viewModel.searchValue = ""
-            }
-        )
+        AnimatedVisibility(
+            visible = isSearchBarVisible,
+            enter = expandVertically(animationSpec = tween(durationMillis = 125)),
+            exit = shrinkVertically(animationSpec = tween(durationMillis = 125))
+        ) {
+            SearchBar(
+                searchValue = viewModel.searchValue,
+                searchInputChange = {
+                    viewModel.searchValue = it
+                    viewModel.searchDictionary(it)
+                },
+                clearSearch = {
+                    viewModel.clearSearch()
+                    viewModel.searchValue = ""
+                }
+            )
+        }
         if (viewModel.searchValue.isNotEmpty()) {
             DictionaryResults(
-                searchResults = viewModel.searchResults
+                searchResults = viewModel.searchResults,
+                listState = listState
             )
         }
     }
