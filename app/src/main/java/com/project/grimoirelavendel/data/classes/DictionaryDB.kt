@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.project.grimoirelavendel.data.interfaces.DictionaryDAO
 
 @Database(
@@ -14,6 +15,7 @@ import com.project.grimoirelavendel.data.interfaces.DictionaryDAO
     version = 1,
     exportSchema = false
 )
+@TypeConverters(DefinitionSerializer::class)
 abstract class DictionaryDB: RoomDatabase() {
     abstract fun dictionaryDAO(): DictionaryDAO
 

@@ -7,25 +7,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.project.grimoirelavendel.data.classes.DictionaryDB
+import com.project.grimoirelavendel.data.classes.DictionaryEntry
 import com.project.grimoirelavendel.network.DictionaryRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.launch
 
 class DictionaryViewModel(application: Application) : AndroidViewModel(application) {
     private val database = DictionaryDB.getInstance(application)
     private val repository = DictionaryRepository(database = database)
 
-    var searchResults = repository.searchDictionary("")
+    var searchResults by mutableStateOf<Flow<List<DictionaryEntry>>>(
+        repository.searchDictionary("")
+    )
 
     fun searchDictionary(query: String) {
-        if (query != "") {
-            viewModelScope.launch {
-                searchResults = repository.searchDictionary(query)
-            }
-        }
+        searchResults = repository.searchDictionary(query)
     }
 
     fun clearSearch() {
@@ -49,7 +47,6 @@ fun DictionaryVM (
             clearSearch = {
                 viewModel.clearSearch()
                 viewModel.searchValue = ""
-                viewModel.searchResults = emptyFlow()
             }
         )
         DictionaryResults(
