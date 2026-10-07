@@ -10,18 +10,15 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.project.grimoirelavendel.data.classes.DictionaryEntry
-import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun DictionaryResults (
-    searchResultsFlow: Flow<List<DictionaryEntry>>
+    searchResults: List<DictionaryEntry>
 ) {
-    val searchResults = searchResultsFlow.collectAsState(initial = emptyList())
 
     LazyColumn (
         modifier = Modifier
@@ -31,10 +28,10 @@ fun DictionaryResults (
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         items(
-            count = searchResults.value.size,
+            count = searchResults.size
         ) {
             DictionaryEntryCard(
-                entry = searchResults.value[it]
+                entry = searchResults[it]
             )
         }
     }
