@@ -21,7 +21,8 @@ fun SearchBar (
     Row (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 4.dp),
+            .padding(horizontal = 4.dp)
+            .padding(bottom = 4.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         OutlinedTextField(

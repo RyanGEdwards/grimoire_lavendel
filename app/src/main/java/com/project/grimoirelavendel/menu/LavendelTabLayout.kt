@@ -1,6 +1,7 @@
 package com.project.grimoirelavendel.menu
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
@@ -19,8 +20,7 @@ fun LavendelTabLayout (
 ) {
     HorizontalPager(
         state = pagerState,
-        contentPadding = contentPadding,
-        modifier = Modifier,
+        modifier = Modifier.padding(contentPadding),
         userScrollEnabled = false,
         verticalAlignment = Alignment.Top
     ) { tab ->

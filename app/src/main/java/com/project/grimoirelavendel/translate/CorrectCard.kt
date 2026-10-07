@@ -48,7 +48,9 @@ fun CorrectCard (
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
             .padding(vertical = 8.dp)
-            .clickable { onClick() }
+            .clickable { onClick() },
+        elevation = CardDefaults.cardElevation(),
+        border = CardDefaults.outlinedCardBorder()
     ) {
         CardHeader(
             title = "Correct Text",
