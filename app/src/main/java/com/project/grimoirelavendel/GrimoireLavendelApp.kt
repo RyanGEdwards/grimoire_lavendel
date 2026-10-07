@@ -1,5 +1,12 @@
 package com.project.grimoirelavendel
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,7 +19,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
 import com.project.grimoirelavendel.data.enums.AppDestinations
 import com.project.grimoirelavendel.menu.LavendelBottomNavBar
 import com.project.grimoirelavendel.menu.LavendelSideMenu
@@ -56,9 +66,23 @@ fun GrimoireLavendelApp() {
                     )
                 }
             ) { innerPadding ->
+                val layoutDirection = LocalLayoutDirection.current
+                val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
+                
+                // Calculate the maximum horizontal padding to ensure symmetry
+                val maxHorizontalPadding = maxOf(
+                    safeDrawing.calculateStartPadding(layoutDirection),
+                    safeDrawing.calculateEndPadding(layoutDirection)
+                )
+
                 LavendelTabLayout(
                     pagerState = pagerState,
-                    contentPadding = innerPadding,
+                    contentPadding = PaddingValues(
+                        start = maxHorizontalPadding,
+                        top = innerPadding.calculateTopPadding(),
+                        end = maxHorizontalPadding,
+                        bottom = innerPadding.calculateBottomPadding()
+                    ),
                     deepl = deepl
                 )
             }
