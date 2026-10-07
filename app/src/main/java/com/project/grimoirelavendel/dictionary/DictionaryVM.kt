@@ -53,8 +53,10 @@ fun DictionaryVM (
                 viewModel.searchValue = ""
             }
         )
-        DictionaryResults(
-            searchResults = viewModel.searchResults
-        )
+        if (viewModel.searchValue.isNotEmpty()) {
+            DictionaryResults(
+                searchResults = viewModel.searchResults
+            )
+        }
     }
 }
