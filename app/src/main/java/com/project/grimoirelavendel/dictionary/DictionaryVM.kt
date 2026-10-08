@@ -51,7 +51,7 @@ fun DictionaryVM (
     val listState = rememberLazyListState()
     val isSearchBarVisible by remember {
         derivedStateOf {
-            listState.firstVisibleItemIndex == 0 && listState.firstVisibleItemScrollOffset < 400
+            listState.firstVisibleItemIndex == 0 && listState.firstVisibleItemScrollOffset < 200
         }
     }
 
