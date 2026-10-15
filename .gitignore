@@ -13,5 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-app/src/main/java/com/project/grimoirelavendel/data/Environment.kt
+app/src/main/java/com/project/grimoirelavendel/data/classes/Environment.kt
 app/src/main/assets/dictionary.db

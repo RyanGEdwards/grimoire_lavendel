@@ -88,7 +88,6 @@ fun TermGlossaries (
                     modifier = Modifier.padding(start = 4.dp)
                 )
             }
-
             i++
         }
     }
