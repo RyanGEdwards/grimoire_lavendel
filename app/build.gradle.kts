@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+
     kotlin("plugin.serialization") version "2.0.0"
 }
 
@@ -50,13 +52,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.okhttp3:okhttp:5.5.0")
     implementation("com.squareup.okhttp3:logging-interceptor:5.5.0")
@@ -65,4 +60,19 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.11.0")
     implementation("androidx.compose.material:material-icons-extended")
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    ksp(libs.room.compiler)
 }

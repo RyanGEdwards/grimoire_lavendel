@@ -1,4 +1,4 @@
-package com.project.grimoirelavendel.data
+package com.project.grimoirelavendel.data.classes
 
 import kotlinx.serialization.Serializable
 

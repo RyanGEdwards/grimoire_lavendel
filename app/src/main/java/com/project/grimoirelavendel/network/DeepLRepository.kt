@@ -1,12 +1,12 @@
 package com.project.grimoirelavendel.network
 
-import com.project.grimoirelavendel.data.CorrectRequest
-import com.project.grimoirelavendel.data.CorrectResponse
-import com.project.grimoirelavendel.data.Environment
-import com.project.grimoirelavendel.data.ImproveRequest
-import com.project.grimoirelavendel.data.ImproveResponse
-import com.project.grimoirelavendel.data.TranslationRequest
-import com.project.grimoirelavendel.data.TranslationResponse
+import com.project.grimoirelavendel.data.classes.CorrectRequest
+import com.project.grimoirelavendel.data.classes.CorrectResponse
+import com.project.grimoirelavendel.data.classes.Environment
+import com.project.grimoirelavendel.data.classes.ImproveRequest
+import com.project.grimoirelavendel.data.classes.ImproveResponse
+import com.project.grimoirelavendel.data.classes.TranslationRequest
+import com.project.grimoirelavendel.data.classes.TranslationResponse
 
 class DeepLRepository {
     val environment = Environment()

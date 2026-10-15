@@ -1,4 +1,4 @@
-package com.project.grimoirelavendel.data
+package com.project.grimoirelavendel.data.enums
 
 enum class Languages (
     val language: String,

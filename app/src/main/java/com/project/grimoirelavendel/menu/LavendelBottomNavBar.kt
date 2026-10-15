@@ -4,7 +4,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
-import com.project.grimoirelavendel.data.AppDestinations
+import com.project.grimoirelavendel.data.enums.AppDestinations
 
 @Composable
 fun LavendelBottomNavBar (

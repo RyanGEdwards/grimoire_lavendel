@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.project.grimoirelavendel.data.TranslationResponse
+import com.project.grimoirelavendel.data.classes.TranslationResponse
 
 @Composable
 fun TranslateCard (
@@ -52,7 +52,9 @@ fun TranslateCard (
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
             .padding(vertical = 8.dp)
-            .clickable { onClick() }
+            .clickable { onClick() },
+        elevation = CardDefaults.cardElevation(),
+        border = CardDefaults.outlinedCardBorder()
     ) {
         CardHeader(
             title = "Translate Text",

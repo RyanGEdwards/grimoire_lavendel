@@ -1,4 +1,4 @@
-package com.project.grimoirelavendel.data
+package com.project.grimoirelavendel.data.enums
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book

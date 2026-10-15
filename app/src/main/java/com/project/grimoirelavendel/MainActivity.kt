@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.project.grimoirelavendel.data.classes.DictionaryDB
 import com.project.grimoirelavendel.ui.theme.GrimoireLavendelTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +18,10 @@ class MainActivity : ComponentActivity() {
             GrimoireLavendelTheme {
                 GrimoireLavendelApp()
             }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            DictionaryDB.startup(applicationContext)
         }
     }
 }

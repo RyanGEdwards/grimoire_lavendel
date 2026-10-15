@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewModelScope
-import com.project.grimoirelavendel.data.CorrectResponse
-import com.project.grimoirelavendel.data.ImproveResponse
-import com.project.grimoirelavendel.data.Languages
-import com.project.grimoirelavendel.data.TranslationResponse
+import com.project.grimoirelavendel.data.classes.CorrectResponse
+import com.project.grimoirelavendel.data.classes.ImproveResponse
+import com.project.grimoirelavendel.data.enums.Languages
+import com.project.grimoirelavendel.data.classes.TranslationResponse
 import com.project.grimoirelavendel.network.DeepLRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
