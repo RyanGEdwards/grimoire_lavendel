@@ -2,41 +2,41 @@ package com.project.grimoirelavendel.data.interfaces
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.project.grimoirelavendel.data.classes.DictionaryEntry
+import com.project.grimoirelavendel.data.classes.DictionaryEntryWithDetails
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DictionaryDAO {
     @Query("""
-        SELECT d.* FROM dictionary_entries d
-        WHERE d.term LIKE :query || '%' 
-            OR d.reading LIKE :query || '%' 
-            OR d.id IN (
-                SELECT rowid FROM fts_definitions 
-                WHERE fts_definitions MATCH :query
-            )
+        SELECT d.* 
+        FROM dictionary_entries d
+        JOIN (
+            -- 1. High-priority Japanese B-Tree lookup (Hits idx_term and idx_reading)
+            SELECT id, 1 AS match_type 
+            FROM dictionary_entries 
+            WHERE term = :query OR reading = :query
+            
+            UNION ALL
+            
+            -- 2. Japanese Prefix B-Tree lookup
+            SELECT id, 2 AS match_type 
+            FROM dictionary_entries 
+            WHERE (term LIKE :query || '%' OR reading LIKE :query || '%')
+                AND term != :query AND reading != :query
+            
+            UNION ALL
+            
+            -- 3. Fast English FTS lookup (Hits FTS index directly)
+            SELECT rowid AS id, 3 AS match_type 
+            FROM fts_definitions 
+            WHERE clean_glossary_text LIKE '%' || :query || '%'
+        ) AS matches ON d.id = matches.id
+        GROUP BY d.id -- Deduplicate entries that match both JP prefix and FTS
         ORDER BY 
-            CASE 
-                -- 1. Exact term or reading match (Japanese headwords)
-                WHEN d.term = :query OR d.reading = :query THEN 1
-
-                -- 2. Term or reading starts with the exact query
-                WHEN d.term LIKE :query || '%' OR d.reading LIKE :query || '%' THEN 2
-
-                -- 3. Definition contains the exact standalone query word
-                WHEN d.id IN (
-                    SELECT rowid FROM fts_definitions 
-                    WHERE fts_definitions MATCH '"' || :query || '"'
-                ) THEN 3
-        
-                -- 4. Fallback for broader/partial FTS matches
-                ELSE 4
-            END ASC,
-        -- Secondary sort: frequency score (your original ranking criterion)
-        d.score DESC,
-        -- Tertiary sort: shorter terms rank higher (e.g. 束 before 束縛)
-        LENGTH(d.term) ASC
+            MIN(matches.match_type) ASC,
+            d.score DESC,
+            LENGTH(d.term) ASC
         LIMIT 50
     """)
-    fun search(query: String): Flow<List<DictionaryEntry>>
+    fun search(query: String): Flow<List<DictionaryEntryWithDetails>>
 }

@@ -19,7 +19,7 @@ data class DictionaryEntry (
     val reading: String,
 
     @ColumnInfo(name = "definition_json")
-    val definitions: DefinitionData,
+    val definitionJson: String,
     val score: Int,
 
     @ColumnInfo(name = "term_tags")
