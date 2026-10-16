@@ -15,3 +15,4 @@
 local.properties
 app/src/main/java/com/project/grimoirelavendel/data/classes/Environment.kt
 app/src/main/assets/dictionary.db
+app/src/main/assets/jmdict.db
