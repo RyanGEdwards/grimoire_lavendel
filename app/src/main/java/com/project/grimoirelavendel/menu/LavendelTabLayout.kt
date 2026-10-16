@@ -7,7 +7,7 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.project.grimoirelavendel.dictionary.newDict.view.DictionaryTab
+import com.project.grimoirelavendel.dictionary.view.DictionaryScreen
 import com.project.grimoirelavendel.network.DeepLRepository
 import com.project.grimoirelavendel.study.StudyVM
 import com.project.grimoirelavendel.translate.TranslateVM
@@ -25,7 +25,7 @@ fun LavendelTabLayout (
         verticalAlignment = Alignment.Top
     ) { tab ->
         when (tab) {
-            0 -> DictionaryTab()
+            0 -> DictionaryScreen()
             1 -> TranslateVM(
                 repo = deepl
             )

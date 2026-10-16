@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.project.grimoirelavendel.data.newData.GrimoireDB
+import com.project.grimoirelavendel.data.localDatabase.GrimoireDB
 import com.project.grimoirelavendel.ui.theme.GrimoireLavendelTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
