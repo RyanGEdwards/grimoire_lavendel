@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.project.grimoirelavendel.data.newData.entities.DeckEntity
 import com.project.grimoirelavendel.data.newData.entities.EntryEntity
+import com.project.grimoirelavendel.data.newData.entities.EntryFtsEntity
 import com.project.grimoirelavendel.data.newData.entities.ExampleEntity
 import com.project.grimoirelavendel.data.newData.entities.GlossEntity
 import com.project.grimoirelavendel.data.newData.entities.KanjiEntity
@@ -24,6 +25,7 @@ import com.project.grimoirelavendel.data.newData.entities.SrsCardEntity
 @Database(
     entities = [
         EntryEntity::class,
+        EntryFtsEntity::class,
         KanjiEntity::class,
         ReadingEntity::class,
         ReadingRestrictionEntity::class,

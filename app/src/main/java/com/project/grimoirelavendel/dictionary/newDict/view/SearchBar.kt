@@ -1,4 +1,4 @@
-package com.project.grimoirelavendel.dictionary
+package com.project.grimoirelavendel.dictionary.newDict.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

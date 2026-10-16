@@ -1,5 +1,6 @@
 package com.project.grimoirelavendel.data.newData.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -8,15 +9,21 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "reading_elements",
     foreignKeys = [ForeignKey(
-        entity = EntryEntity::class, parentColumns = ["id"], childColumns = ["entryId"], onDelete = ForeignKey.CASCADE
+        entity = EntryEntity::class, 
+        parentColumns = ["id"], 
+        childColumns = ["entry_id"], 
+        onDelete = ForeignKey.CASCADE
     )],
-    indices = [Index("entryId")]
+    indices = [
+        Index("entry_id"),
+        Index(value = ["entry_id"], name = "idx_reading_entry")
+    ]
 )
 data class ReadingEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val entryId: Long,
+    @PrimaryKey val id: Long?,
+    @ColumnInfo(name = "entry_id") val entryId: Long,
     val reb: String,
-    val reNokanji: Int,
-    val rePri: String?,
-    val reInf: String?
+    @ColumnInfo(name = "re_nokanji") val reNokanji: Int?, // Changed to Int? to match asset's notNull=false
+    @ColumnInfo(name = "re_pri") val rePri: String?,
+    @ColumnInfo(name = "re_inf") val reInf: String?
 )

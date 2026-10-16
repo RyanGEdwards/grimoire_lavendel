@@ -20,11 +20,15 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.project.grimoirelavendel.data.classes.DictionaryDB
 import com.project.grimoirelavendel.data.classes.DictionaryEntryWithDetails
+import com.project.grimoirelavendel.data.newData.GrimoireDB
+import com.project.grimoirelavendel.data.newData.GrimoireRepository
+import com.project.grimoirelavendel.dictionary.newDict.view.SearchBar
+import com.project.grimoirelavendel.dictionary.newDict.viewModel.DictionaryViewModel
 import com.project.grimoirelavendel.network.DictionaryRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class DictionaryViewModel(application: Application) : AndroidViewModel(application) {
+class DictionaryViewsModel(application: Application) : AndroidViewModel(application) {
     private val database = DictionaryDB.getInstance(application)
     private val repository = DictionaryRepository(database = database)
 
@@ -63,7 +67,7 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
 
 @Composable
 fun DictionaryVM (
-    viewModel: DictionaryViewModel = viewModel()
+    viewModel: DictionaryViewsModel = viewModel()
 ) {
     val listState = rememberLazyListState()
     val isSearchBarVisible by remember {
